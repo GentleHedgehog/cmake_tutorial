@@ -381,4 +381,8 @@ message("varWithParentScope = ${varWithParentScope}")
 message("varWithChildScope = ${varWithChildScope}")
 message("varWithParentScopeToChangeInSubdir = ${varWithParentScopeToChangeInSubdir}")
 
+
+message("------- chapter 8 - funcs and macros ----------")
+add_subdirectory(chapter8_funcs_and_macros)
+
 message("\n\n")
