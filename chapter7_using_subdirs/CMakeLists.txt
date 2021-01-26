@@ -1,5 +1,3 @@
-message("------- chapter 7 - using subdirs ----------")
-
 # -- add_subdirectory() --
 message("-- add_subdirectory() --")
 # add_subdirectory(sourceDir [ binaryDir ] [ EXCLUDE_FROM_ALL ])
@@ -40,3 +38,39 @@ message("varWithParentScopeToChangeInSubdir changed in subdir = ${varWithParentS
 
 # -- include --
 message("-- include() --")
+
+# first form:
+# include(fileName [OPTIONAL] [RESULT_VARIABLE myVar] [NO_POLICY_SCOPE])
+# analog to add_subdirectory():
+# - expects fileName instead of CMakeLists.txt
+# - extension of fileName is *.cmake (may be anything)
+# - does not introduce a new variable scope
+# - introduce policy scope (NO_POLICY_SCOPE - to prevent it)
+# - CMAKE_CURRENT_..(source/bin dir) vars do not change
+
+# second form for modules (ditto, all but the first rule are accepted):
+# include(module [OPTIONAL] [RESULT_VARIABLE myVar] [NO_POLICY_SCOPE])
+
+# for facilitating purposes (it works for any file being processing by CMake):
+# CMAKE_CURRENT_LIST_DIR - analog of CMAKE_CURRENT_SOURCE_DIR
+# CMAKE_CURRENT_LIST_FILE - current file name
+# CMAKE_CURRENT_LIST_LINE - current line (for debug)
+
+# include() allows to include a file that was already used in project independently
+
+
+# -- ending processing early --
+message("-- ending processing early --")
+
+# return() - ends processing of the current file (but cannot return a value to the caller)
+# include_guard(arg) - like #pragma once (begins from v3.10)
+# - no arg - variable scope is assumed, analog: if (DEFINED var) return() endif() set(var 1) # variable scope of a parent file
+# - GLOBAL - if file has been processed anywhere (variable scope is ignored)
+# - DIRECTORY - if file has been processed only withing the current dir and below
+
+
+# -- Recommended practices --
+# prefer add_subdirectory() in simple projects
+# use include() only if it makes sense
+# prefer CMAKE_CURRENT_LIST_DIR over CMAKE_CURRENT_SOURCE_DIR (to facilitate a transfer from add_subdirectory() to include())
+# prefer to use include_guard() without arguments

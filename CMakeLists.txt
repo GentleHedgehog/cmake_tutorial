@@ -370,6 +370,9 @@ endforeach()
 # store CMAKE_MATCH_<n> results asap (if(xxx MATCHES regex)), it will be overwritten by next regexp operation
 # for foreach() always specify start and stop values, prefere IN LISTS or IN ITEMS forms
 
+
+message("------- chapter 7 - using subdirs ----------")
+
 set(varWithParentScopeToChangeInSubdir "change me")
 set(varWithParentScope "foo")
 set(varWithChildScope "")
