@@ -388,4 +388,7 @@ add_subdirectory(chapter8_funcs_and_macros)
 message("------- chapter 9 - Properties ----------")
 add_subdirectory(chapter9_properties)
 
+message("------- chapter10 - generator expression ----------")
+add_subdirectory(chapter10_generator_expression)
+
 message("\n\n")
