@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5) # cmake should bahave the same as version 3.5 (major.minor[.patch[.tweak]])
 
-project(ch1 VERSION 1.0 LANGUAGES CXX) # [VERSION major[.minor[.patch[.tweak]]]], LANGUAGES C CXX Java ... NONE (by default C and CXX)
+project(ch1 VERSION 1.0 LANGUAGES CXX C) # [VERSION major[.minor[.patch[.tweak]]]], LANGUAGES C CXX Java ... NONE (by default C and CXX)
 # project - check compiler and linker for workability
 
 
@@ -390,5 +390,10 @@ add_subdirectory(chapter9_properties)
 
 message("------- chapter10 - generator expression ----------")
 add_subdirectory(chapter10_generator_expression)
+
+
+message("------- chapter11 - modules ----------")
+add_subdirectory(chapter11_modules)
+
 
 message("\n\n")
