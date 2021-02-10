@@ -395,5 +395,8 @@ add_subdirectory(chapter10_generator_expression)
 message("------- chapter11 - modules ----------")
 add_subdirectory(chapter11_modules)
 
+message("------- chapter12 - policies ----------")
+add_subdirectory(chapter12_policies)
+
 
 message("\n\n")
