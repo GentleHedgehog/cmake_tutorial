@@ -112,7 +112,7 @@ unset(myVar)
 # normal vars have PRECEDENCE over cache vars!
 
 # set cache value in cmd:
-# cmake -D myVar:type=someValue ~ set(myVar someValue CACHE type FORCE)
+# cmake -DmyVar:type=someValue ~ set(myVar someValue CACHE type FORCE)
 # we can omit type (is similar to INTERNAL), but shouldnt: set(varWithoutType .. [FILE]PATH ..) -> may produce absolute path instead of relative
 # use -D for each var
 # if var with spaces:  cmake -D "myVar:type=some value"
@@ -397,6 +397,9 @@ add_subdirectory(chapter11_modules)
 
 message("------- chapter12 - policies ----------")
 add_subdirectory(chapter12_policies)
+
+message("------- Part II - Builds In Depth ----------")
+add_subdirectory(partII)
 
 
 message("\n\n")
