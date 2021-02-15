@@ -47,6 +47,8 @@ message("-- include() --")
 # - does not introduce a new variable scope
 # - introduce policy scope (NO_POLICY_SCOPE - to prevent it)
 # - CMAKE_CURRENT_..(source/bin dir) vars do not change
+# - OPTIONAL - no error if file doesnt exist
+# - RESULT_VARIABLE - set full name of the included file, or NOTFOUND is it failed
 
 # second form for modules (ditto, all but the first rule are accepted):
 # include(module [OPTIONAL] [RESULT_VARIABLE myVar] [NO_POLICY_SCOPE])
@@ -65,8 +67,9 @@ message("-- ending processing early --")
 # return() - ends processing of the current file (but cannot return a value to the caller)
 # include_guard(arg) - like #pragma once (begins from v3.10)
 # - no arg - variable scope is assumed, analog: if (DEFINED var) return() endif() set(var 1) # variable scope of a parent file
+#   i.e. this file cannot be included twice in the parent file scope
 # - GLOBAL - if file has been processed anywhere (variable scope is ignored)
-# - DIRECTORY - if file has been processed only withing the current dir and below
+# - DIRECTORY - if file has been processed only withing the current dir and below (can be included within another dir more than once)
 
 
 # -- Recommended practices --

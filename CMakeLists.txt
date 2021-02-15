@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.5) # cmake should bahave the same as version 3.5 (major.minor[.patch[.tweak]])
 
-project(CMakeTutorial VERSION 1.0 LANGUAGES CXX C) # [VERSION major[.minor[.patch[.tweak]]]], LANGUAGES C CXX Java ... NONE (by default C and CXX)
-# project - check compiler and linker for workability
-
+# project - checks compiler and linker for workability
+# [VERSION major[.minor[.patch[.tweak]]]], LANGUAGES C CXX Java ... NONE (by default C and CXX):
+project(CMakeTutorial VERSION 1.0 LANGUAGES CXX C)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)

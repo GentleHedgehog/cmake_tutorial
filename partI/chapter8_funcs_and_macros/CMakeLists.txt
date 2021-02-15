@@ -14,14 +14,14 @@
 
 #macro(name [arg1 [arg2 [..]]])
     # body
-#endfunction()
+#endmacro()
 
 function(print_me) # case insensitive name
     message("hello from func")
     message("all done")
 endfunction()
 
-print_me()
+print_Me() # ditto as print_me
 
 message("-- func/macro args --")
 
@@ -82,7 +82,7 @@ message("-- keyword args --")
 # - noValueKeywords: standalone keywords like boolean switches (true if specified, false - if not)
 # - singleValueKeywords: requires single arg
 # - multiValueKeywords: requires zero or more args
-# - prefix - prepended to found keywords: PREFIX_FOUND_KEYWORD
+# - prefix - prepended to found keywords, for ex.: PREFIX_FOUND_KEYWORD
 # keywods should be like: UPPERCASE_KEYWORD
 # this func fills keyword vars with keywords with prefixes
 
@@ -135,13 +135,13 @@ message("-- Overriding commands --")
 # new func/macro overrides previous one with the same name
 # undocumented feature - previous one can be accessed using the same name with an underscore prepended:
 # nameOfFunc -> _nameOfFunc
-# but this is not reliable solution to use this feature (and it works only for the last override)
+# but this is not a reliable solution to use this feature (and it works only for the last override)
 
 # -- Recommended practices --
 # prefer funcs
 # use macros only where the execution withing the scope of the caller makes sense
 # avoid calling return() in macro
-# use cmake_parse_arguments() (unless it is trivial func)
+# use cmake_parse_arguments() (unless it is a trivial func)
 # create a special directory to keep all *.cmake files
 # DO NOT call funcs with a name that starts with a single underscore
 # DO NOT override buil-in cmake commands

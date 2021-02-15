@@ -72,7 +72,9 @@
 
 # get_directory_property(resultVar [DIRECTORY dir] property)
 # get_directory_property(reusltVar [DIRECTORY dir] DEFINITION varName) # only for debug (retrieve var from another dir)
-# dir - must be encountered by CMake
+# dir - must be encountered by CMake, relative paths are treated as relative to the cur dir
+# if omit dir - current dir
+
 
 
 
@@ -108,10 +110,10 @@
 # --- Cache var properties ---
 # are used to configurate how cache vars are handled in the GUI and the ccmake tools
 
-# use the prop name TYPE (in get_property()) to obtain it
-# set ADVANCED prop ~ mark_as_advanced()
-# set HELPSTRING prop for the tooltip
-# set STRINGS prop for the combobox
+# use the prop name TYPE (in get_property()) to obtain it:
+# - set ADVANCED prop ~ mark_as_advanced()
+# - set HELPSTRING prop for the tooltip
+# - set STRINGS prop for the combobox
 
 
 

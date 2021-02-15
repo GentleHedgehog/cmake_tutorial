@@ -1,11 +1,11 @@
 # description:
 
-#set(varName value... [PARENT_SCOPE])
-# varName - case sensitive, has a scope for read/write
-# variable - interpret as string, that is quoted if contains spaces (if not quoted - space is interpreted as ';')
-# set(var a b c) -> var = "a;b;c"
-# set(var a;b;c) -> var = "a;b;c"
-# set(var "a b c") -> var = "a b c"
+# set(varName value... [PARENT_SCOPE])
+#   varName - case sensitive, has a scope for read/write
+#   variable - interpret as string, that is quoted if contains spaces (if not quoted - space is interpreted as ';')
+#       set(var a b c) -> var = "a;b;c"
+#       set(var a;b;c) -> var = "a;b;c"
+#       set(var "a b c") -> var = "a b c"
 set(ch5Var1 a b c)
 set(ch5Var2 a;b;c)
 set(ch5Var3 "a b c")
@@ -42,31 +42,34 @@ set(multiLine2 [=[
 message(multiLine2 = ${multiLine2})
 
 #unset vars:
-set(myVar)
-unset(myVar)
+set(myVar)      # makes myVar empty
+unset(myVar)    # makes myVar empty
 
-# env vars (wont be visible at build time, only at cmake working time):
-#set(ENV{PATH} "$ENV{PATH}:/opt/myDir")
-#message($ENV{PATH})
+# env vars (wont be visible at build time, only at cmake working time, dont set anything for runtime here):
+# set(ENV{PATH} "$ENV{PATH}:/opt/myDir")
+# message($ENV{PATH})
 
 # CACHE VARS, read as usual vars, but write as:
 # set(varName value... CACHE type "docstring" [FORCE])  # docstring can be empty
 # FORCE - allow to rewrite cache var
 # type and docstring(as tooltip) - for GUI purposes
 # types:
-# BOOL - ON/OFF, TRUE/FALSE, 1/0:
-#   special func: option(optVar helpString [initialValue]), initial == OFF by default, FORCE by default
-#   equal to: set(optVar initialValue CACHE BOOL helpString)
-# FILEPATH - path string (-> open file dialog for user)
-# PATH - ditto (-> open dir dialog)
-# STRING - arbitrary string
-# INTERNAL - not available for the user (for example vars for internal caching)
+#   BOOL - ON/OFF, TRUE/FALSE, 1/0:
+#     special func: option(optVar helpString [initialValue]), initial == OFF by default, FORCE by default
+#     equal to: set(optVar initialValue CACHE BOOL helpString)
+#   FILEPATH - path string (-> open file dialog for user)
+#   PATH - ditto (-> open dir dialog)
+#   STRING - arbitrary string
+#   INTERNAL - not available for the user (for example vars for internal caching)
 
 # normal vars have PRECEDENCE over cache vars!
 
 # set cache value in cmd:
-# cmake -DmyVar:type=someValue ~ set(myVar someValue CACHE type FORCE)
-# we can omit type (is similar to INTERNAL), but shouldnt: set(varWithoutType .. [FILE]PATH ..) -> may produce absolute path instead of relative
+# cmake -D myVar:type=someValue ~ set(myVar someValue CACHE type FORCE)
+# we can omit type (will set type that is similar to INTERNAL), but we shouldnt,
+# next command in CMakeLists.txt:
+#   set(varWithoutType .. [FILE]PATH ..) -> may produce absolute path instead of relative, if we omit the type in a command line:
+#   cmake -D varWithoutType=../folder1/file1.ext
 # use -D for each var
 # if var with spaces:  cmake -D "myVar:type=some value"
 
@@ -86,8 +89,8 @@ set(trafficLight Green CACHE STRING "Status")
 set_property(CACHE trafficLight PROPERTY STRINGS Red Orange Green) # can be rewritten in the next 'set' commands
 
 # advanced vars (viewed in advanced mode in gui):
-#mark_as_advanced([CLEAR|FORCE] var1 [var2...])
-# CLEAR - to unmark
+#   mark_as_advanced([CLEAR|FORCE] var1 [var2...])
+#   CLEAR - to unmark
 
 # -- Debugging Vars and Diagnostics --
 
@@ -172,5 +175,5 @@ message("z = ${z}")
 # prefere cache to env vars (env vars are not the reliable solution)
 # start vars with common prefix (may be closely associated with project name) to group them easily
 # do NOT use the same names for usual and cache vars
-# try to use mode for message command (except debug case, temporarily)
+# try to use mode for message command (except debug case, use it temporarily)
 # occasionally look at the predefined variables in cmake documentation (WIN32, UNIX, etc.)

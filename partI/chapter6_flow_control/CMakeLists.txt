@@ -13,9 +13,13 @@ endif()
 
 # unquoted constats: if (YES) or if (${myVar})
 
-# cmake doc: if (<variable|string>) -> unquoted name of a var OR quoted string
-# variable: its content is compared with false constants, if no match, interpreted as true (undefined var ~ empty string)
-# quoted string: evaluates to false (v3.1 and newer) (without special policy), before 3.1 - transform to variable (substitution)
+# cmake doc: if (<variable|string>) -> unquoted name of a var OR quoted string:
+# - variable:
+#       its content is compared with false constants,
+#       if no match, interpreted as true (undefined var ~ empty string)
+# - quoted string (if it is used as a single argument for 'if' statement):
+#       evaluates to false (v3.1 and newer) (without special policy),
+#       before 3.1 - transform to variable (substitution)
 
 # Logic operators: AND, OR, NOT (with parentheses)
 
@@ -25,19 +29,19 @@ endif()
 # Version: VERSION_LESS, VERSION_GREATER, VERSION_EQUAL, VERSION_LESS_EQUAL*, VERSION_GREATER_EQUAL*
 # * last two operators - available from 3.7
 
-#if (2 GREATER 1) # ok
-#if ("23" EQUAL 23) #ok
-#set(val 42)
-#if (${val} EQUAL 42) #ok
-#if ("${val}" EQUAL 42) #ok
-#if ("23a" EQUAL 23) # error!
+# if (2 GREATER 1) # ok
+# if ("23" EQUAL 23) #ok
+# set(val 42)
+# if (${val} EQUAL 42) #ok
+# if ("${val}" EQUAL 42) #ok
+# if ("23a" EQUAL 23) # error!
 
-#if(1.2.3 VERSION_GREATER 1.2) #ok
+# if(1.2.3 VERSION_GREATER 1.2) #ok
 
 # strings are compared lexicographically (bear in mind about variable substitution)
 
 # regex:
-#set(who Fred)
+set(who Fred)
 #set(who Barney)
 if("Hi from ${who}" MATCHES "Hi from (Fred|Barney).*")
     message("${CMAKE_MATCH_1} says hello")
@@ -51,7 +55,7 @@ endif()
 # if (IS_ABSOLUTE path)
 
 # if (file1 IS_NEWER_THAN file2)
-# true: if files' timestamp is the same OR one of them is missing
+# true: if files' timestamp is the same OR one of them is missing(!)
 # and all paths must be absolute
 
 # EXISTENCE tests:
@@ -139,7 +143,7 @@ foreach(outerVar IN ITEMS a b c)
     message("Accumulated list: ${s}")
 endforeach()
 
-# recommended practices:
+# --- Recommended practices ---
 # minimize opportunities for strings to be interpreted as vars (substitution)
 # avoid unary expression with quotes (prefer string comparison)
 # use cmake 3.1 or newer

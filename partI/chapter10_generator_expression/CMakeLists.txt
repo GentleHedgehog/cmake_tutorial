@@ -15,7 +15,7 @@
 
 # $<1:...> # result - ...
 # $<0:...> # result - empty string (ignored)
-# $<BOOL:...>
+# $<BOOL:...> # works like casting to boolean
 
 # provide simple way to include content:
 # $<AND:expr[,expr..]> # consider wrapping this expr in a $<BOOL:...> to force more tolerant logic
