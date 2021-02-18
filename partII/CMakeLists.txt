@@ -5,4 +5,8 @@ message("------- chapter13 - build type ----------")
 add_subdirectory(chapter13_build_type)
 
 
+message("------- chapter14 - compiler and linker essentials ----------")
+add_subdirectory(chapter14_compiler_linker_essentials)
+
+
 
