@@ -9,4 +9,6 @@ message("------- chapter14 - compiler and linker essentials ----------")
 add_subdirectory(chapter14_compiler_linker_essentials)
 
 
+message("------- chapter15_language_requirements ----------")
+add_subdirectory(chapter15_language_requirements)
 
