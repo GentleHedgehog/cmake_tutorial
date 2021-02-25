@@ -58,7 +58,7 @@
 # cmake will choose appropriate compiler flags itself
 
 
-# if there are CXX_STANDARD 11 and cxx_std_14 together,
+# if there are CXX_STANDARD 11 and cxx_std_14 features together,
 # cmake will enforce the stronger standard requirements (it select C++14 in the case above)
 
 
