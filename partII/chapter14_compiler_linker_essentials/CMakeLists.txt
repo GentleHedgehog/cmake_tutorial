@@ -6,7 +6,7 @@
 
 # -- compiler flags --
 
-# There are lists for compiler flags ('non-Interface props', 'build requirements'):
+# There are lists for compiler flags ('non-Interface props' or 'build requirements'):
 #   - INCLUDE_DIRECTORIES - list of absolute paths for headers,
 #       when target is created, this prop is taken from the directory property of the same name
 #   - COMPILE_DEFINITIONS - definitions look like: VAR=VALUE
@@ -15,7 +15,7 @@
 #       when target is created, this prop is taken from the directory property of the same name
 #       deprecated analog -> COMPILE_FLAGS, but it is a string and requires escape seq. for spaces
 
-# There are similar lists with prefix: INTERFACE_*. They are 'Interface props', or 'usage requirements'.
+# There are similar lists with prefix: INTERFACE_*. They are 'Interface props' or 'usage requirements'.
 # The aim of them is to apply to any other target, which links directly to it.
 # They are not initialized from directory properties, and start out empty.
 

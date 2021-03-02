@@ -12,3 +12,7 @@ add_subdirectory(chapter14_compiler_linker_essentials)
 message("------- chapter15_language_requirements ----------")
 add_subdirectory(chapter15_language_requirements)
 
+message("------- chapter16 target types ----------")
+add_subdirectory(chapter16_target_types)
+
+
