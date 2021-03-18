@@ -15,4 +15,7 @@ add_subdirectory(chapter15_language_requirements)
 message("------- chapter16 target types ----------")
 add_subdirectory(chapter16_target_types)
 
+message("------- chapter17_custom_tasks ----------")
+add_subdirectory(chapter17_custom_tasks)
+
 
