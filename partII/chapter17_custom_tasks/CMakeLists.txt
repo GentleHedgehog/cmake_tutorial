@@ -126,10 +126,107 @@
 
 
 # --- Configure time tasks ---
+# Next statement adds commands to execute at the congigure stage time:
+#   execute_process(COMMAND cmd1 [args..] ...
+#       [WORKING_DIRECTORY dir]
+#       [RESULT_VARIABLE var]
+#       [RESULTS_VARIABLE var]
+#       [OUTPUT_VARIABLE var]
+#       [ERROR_VARIABLE var]
+#       [OUTPUT_STRIP_TRAILING_WHITESPACE]
+#       [ERROR_STRIP_TRAILING_WHITESPACE]
+#       [INPUT_FILE inFile]
+#       [OUTPUT_FILE outFile]
+#       [ERROR_FILE errFile]
+#       [OUTPUT_QUIET]
+#       [ERROR_QUIET]
+#       [TIMEOUT seconds]
+#       )
+# standard out of cmd1 is piped to the input of the next cmd
+# output of a last cmd is piped to the cmake output (or to OUTPUT_VARIABLE | -> both can be merged to single var )
+# err of each cmd is piped to the cmake error output (or to ERROR_VARIABLE |                                     )
+# *_STRIP_TRAILING_WHITESPACE allow to compare out vars without any trailing whitespaces
+# OUTPUT_FILE and ERROR_FILE - alternative to *_VARIABLE (but *_STRIP_TRAILING_WHITESPACE doesnt work)
+# INPUT_FILE - the first cmd input
+# *_QUIET - to discard streams
+# RESULT_VARIABLE can be integer or string
+#   execute_process(COMMAND runSomeScript RESULT_VARIABLE res)
+#   if(res)
+#       message(FATAL_ERROR "runSomeScript failed: ${res}")
+#   endif()
+# RESULTS_VARIABLE - list of results of all commands
+# TIMEOUT - if cmd works more than "seconds" seconds - cmake stops it(?) and set appropriate RESULT_VARIABLE
+#   it only esure the cmd doesnt run longer then period
+# cmake runs commands in the same environment as the main process (but there is exception - see text)
 
 
 
+# --- Platform Independent Commands ---
+# list of commands: cmake -E help
 
+# examples:
+
+# delete dir (remove_directory):
+#   set(discardDir "${CMAKE_CURRENT_BINARY_DIR}/private")
+#   add_custom_target(myCleanup
+#       COMMAND "${CMAKE_COMMAND}" -E remove_directory "${discardDir}"
+#   )
+
+#use -E echo instead of COMMENT:
+#   set(discardDir "${CMAKE_CURRENT_BINARY_DIR}/private")
+#   add_custom_target(myCleanup
+#       COMMAND "${CMAKE_COMMAND}" -E echo "Removing ${discardDir}"
+#       COMMAND "${CMAKE_COMMAND}" -E remove_directory "${discardDir}"
+#   )
+
+# script processing mode: cmake [options] -P filename
+# filename - script with usual CMakeLists.txt code to build complex logic
+#   it is processed as just a set of commands rather than as a project
+# in variables == -D options:
+#   cmake -DOPTION_A=1 -DOPTION_B=foo -P myCustomScript.cmake
+
+
+
+# --- Combining The Different Approaches ---
+
+# CMakeLists.txt:
+#   cmake_minimum_required(VERSION 3.0)
+#   project(Example)
+#
+#   add_executable(genFile genFile.cpp)
+#   set(outDir "foo")
+#   add_custom_target(archiver
+#       COMMAND ${CMAKE_COMMAND} -E echo "archiving gen files"
+#       COMMAND ${CMAKE_COMMAND} -E remove_directory "${outDir}"
+#       COMMAND ${CMAKE_COMMAND} -E make_directory "${outDir}"
+#       COMMAND genFile "${outDir}"
+#       COMMAND ${CMAKE_COMMAND} "-DTAR_DIR=${outDir}" -P "${CMAKE_CURRENT_SOURCE_DIR}/archiver.cmake"
+#   )
+# archiver.cmake:
+#   cmake_minimum_required(VERSION 3.0)
+#   if(NOT TAR_DIR)
+#       message(FATAL_ERROR "TAR_DIR must be set")
+#   endif()
+#   set(archive archive.tar)
+#   execute_process(COMMAND ${CMAKE_COMMAND} -E tar cf ${archive} "${TAR_DIR}" RESULT_VARIABLE res)
+#   if(res)
+#       message(FATAL_ERROR "archiving failed: ${res}")
+#   endif()
+#   execute_process(COMMAND ${CMAKE_COMMAND} -E md5sum ${archive} OUTPUT_VARIABLE md5output RESULT_VARIABLE res)
+#   if(res)
+#       message(FATAL_ERROR "md5 failed: ${res}")
+#   endif()
+#   string(REGEX MATCH "^ *[^ ]*" md5sum "${md5output}")
+#   message("Archive MD5 sum: ${md5sum}")
 
 
 # --- Recommended practices ---
+# prefer add_custom_*() instead of execute_process() for lightweight configuring step
+# use cmake command mode (-E) and cmake scripting language for portability
+# prefere cmake -E echo instead of COMMENT keyword
+# try to avoid (add_custom_command()):
+#   PRE_BUILD
+#   IMPLICIT_DEPENDS and DEPFILE
+#   listing a src file as a MAIN_DEPENDENCY unless the intention is to replace the default build rule for that src file
+# write all deps by hand (DEPENDS) with absulute file paths
+# test result of execute_process by RESULT_VARIABLE
