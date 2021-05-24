@@ -18,4 +18,8 @@ add_subdirectory(chapter16_target_types)
 message("------- chapter17_custom_tasks ----------")
 add_subdirectory(chapter17_custom_tasks)
 
+message("------- chapter18_working_with_files ----------")
+add_subdirectory(chapter18_working_with_files)
+
+
 
