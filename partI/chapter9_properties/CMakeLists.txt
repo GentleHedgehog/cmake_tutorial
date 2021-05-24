@@ -88,7 +88,8 @@
 #                       propName1 val1 [..])
 # get_target_property(resultVar target propName)
 
-# family of target_..() commands - very helps to work with targets (defines properties and propagation info for the other linked targets)
+# family of target_..() commands - very helps to work with targets
+# (defines properties and propagation info for the other linked targets)
 
 
 
