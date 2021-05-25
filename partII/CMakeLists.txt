@@ -22,4 +22,9 @@ message("------- chapter18_working_with_files ----------")
 add_subdirectory(chapter18_working_with_files)
 
 
+message("------- chapter19_specifying_ver_details ----------")
+add_subdirectory(chapter19_specifying_ver_details)
+
+
+
 
