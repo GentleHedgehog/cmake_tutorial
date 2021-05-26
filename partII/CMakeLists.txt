@@ -21,9 +21,13 @@ add_subdirectory(chapter17_custom_tasks)
 message("------- chapter18_working_with_files ----------")
 add_subdirectory(chapter18_working_with_files)
 
-
 message("------- chapter19_specifying_ver_details ----------")
 add_subdirectory(chapter19_specifying_ver_details)
+
+message("------- chapter20_libraries ----------")
+add_subdirectory(chapter20_libraries)
+
+
 
 
 
