@@ -55,16 +55,18 @@ endif()
 # if (IS_ABSOLUTE path)
 
 # if (file1 IS_NEWER_THAN file2)
-# true: if files' timestamp is the same OR one of them is missing(!)
+# true if file1 is newer than file2
+# also true: if files' timestamp is the same(?) OR one of them is missing(!)
 # and all paths must be absolute
 
 # EXISTENCE tests:
 
-#if (DEFINED name) # true if name exists (can be ENV{name})
-#if (COMMAND name) # true if command exists
-#if (POLICY name) # true if policy (CMPxxxx) is known to cmake
-#if (TARGET name) # true if target was defined (by add_executable, add_library or add_custom_target) (in any directory relative to this point)
-#if (TEST name) # true if test was defined (by add_test())
+# if (DEFINED name) # true if name exists (can be ENV{name})
+# if (COMMAND name) # true if command exists
+# if (POLICY name) # true if policy (CMPxxxx) is known to cmake
+# if (TARGET name) # true if target was defined (by add_executable, add_library or add_custom_target)
+#   (in any directory relative to this point)
+# if (TEST name) # true if test was defined (by add_test())
 # if (value IN_LIST listVar) # true if value is in listVar
 
 # -- COMMON EXAMPLES --

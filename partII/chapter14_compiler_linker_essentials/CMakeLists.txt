@@ -2,7 +2,7 @@
 # there are many features of build controling, from global settings (coarse settings of a build)
 # to more focused features that are targeted to tune each target independently
 
-# --- Target properties ---
+# --- 1. Target properties ---
 
 # -- compiler flags --
 
@@ -94,7 +94,7 @@
 # it support gen expr (but there is no need in it)
 
 
-# --- Directory properties and commands ---
+# --- 2. Directory properties and commands ---
 
 # Prefer to uset target_* (since v3.0) instead of set directory props directly, but we should at least be aware of them:
 
@@ -145,7 +145,7 @@
 # avoid to use it
 
 
-# --- Compiler and linker variables ---
+# --- 3. Compiler and linker variables ---
 
 # To set custom features users can use variables instead of props
 # These variables are usually cache vars (but can be ordinal var)

@@ -27,6 +27,9 @@ add_subdirectory(chapter19_specifying_ver_details)
 message("------- chapter20_libraries ----------")
 add_subdirectory(chapter20_libraries)
 
+message("------- chapter21_toolchain ----------")
+add_subdirectory(chapter21_toolchain)
+
 
 
 
