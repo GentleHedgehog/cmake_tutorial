@@ -74,7 +74,7 @@ unset(myVar)    # makes myVar empty
 # if var with spaces:  cmake -D "myVar:type=some value"
 
 # delete cache vars in cmd (try to avoid wildcards: *, ?):
-# cmake -U 'help*' -U foo ..
+# cmake -U 'help*'cmd -U foo ..
 
 
 # -- GUI --

@@ -15,5 +15,8 @@ add_subdirectory(partI)
 message("------- Part II - Builds In Depth ----------")
 add_subdirectory(partII)
 
+message("------- Part III - Bigger Picture ----------")
+add_subdirectory(partIII)
+
 
 message("\n\n")
